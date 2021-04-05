@@ -1,5 +1,6 @@
 package xyz.voxylu.spigot.skydef;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import org.bukkit.Location;
@@ -33,7 +34,7 @@ public class RandomTp {
     this.size = size;
   }
 
-  private Location getLocation(World world) {
+  public Location getLocation(World world) {
     int x = getRandomCoord(this.center.getBlockX());
     int y = 120;
     int z = getRandomCoord(this.center.getBlockZ());
@@ -48,10 +49,23 @@ public class RandomTp {
     return location;
   }
 
-  public void teleport(Player player) {
+  public void teleportOnePlayer(Player player) {
     World world = player.getWorld();
     Location location = getLocation(world);
 
+    teleportToLocation(player, location);
+  }
+
+  public void teleportMultiplePlayers(ArrayList<Player> players) {
+    World world = center.getWorld();
+    Location location = getLocation(world);
+
+    for (Player player : players) {
+      teleportToLocation(player, location);
+    }
+  }
+
+  private void teleportToLocation(Player player, Location location) {
     player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * 30, 5));
     player.teleport(location);
   }

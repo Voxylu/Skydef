@@ -22,7 +22,7 @@ public class Rtp implements CommandExecutor {
     if (sender instanceof Player) {
       Player player = (Player) sender;
 
-      this.randomTp.teleport(player);
+      this.randomTp.teleportOnePlayer(player);
 
       return true;
     } else {

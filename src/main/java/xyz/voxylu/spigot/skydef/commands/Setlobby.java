@@ -9,15 +9,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.command.CommandExecutor;
 
+import xyz.voxylu.spigot.skydef.App;
 import xyz.voxylu.spigot.skydef.Data;
 
 public class Setlobby implements CommandExecutor {
-  private Logger logger;
-  private Data data;
+  private App app;
 
-  public Setlobby(Logger logger, Data data) {
-    this.logger = logger;
-    this.data = data;
+  public Setlobby(App app) {
+    this.app = app;
   }
 
   @Override
@@ -33,7 +32,7 @@ public class Setlobby implements CommandExecutor {
       world.setPVP(false);
       world.setSpawnLocation(location);
 
-      this.data.lobbyPosition = location;
+      app.data.lobbyPosition = location;
 
       return true;
     } else {

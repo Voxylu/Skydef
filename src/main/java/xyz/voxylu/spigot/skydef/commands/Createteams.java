@@ -7,15 +7,14 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import xyz.voxylu.spigot.skydef.App;
 import xyz.voxylu.spigot.skydef.Data;
 
 public class Createteams implements CommandExecutor {
-  private Logger logger;
-  private Data data;
+  private App app;
 
-  public Createteams(Logger logger, Data data) {
-    this.logger = logger;
-    this.data = data;
+  public Createteams(App app) {
+    this.app = app;
   }
 
   @Override
@@ -33,8 +32,8 @@ public class Createteams implements CommandExecutor {
       player.sendMessage(
           String.format("Taille équipe de défense: %d, taille équipe d'attaque: %d.", defenderSize, attackerSize));
 
-      this.data.attackerTeamSize = attackerSize;
-      this.data.defenderTeamSize = defenderSize;
+      app.data.attackerTeamSize = attackerSize;
+      app.data.defenderTeamSize = defenderSize;
 
       return true;
     } else {
