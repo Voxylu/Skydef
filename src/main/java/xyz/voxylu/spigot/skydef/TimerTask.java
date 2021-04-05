@@ -1,13 +1,15 @@
 package xyz.voxylu.spigot.skydef;
 
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class TimerTask extends BukkitRunnable {
   private int timer = 0;
-  private Board board;
+  private App app;
 
-  public TimerTask(Board board) {
-    this.board = board;
+  public TimerTask(App app) {
+    this.app = app;
   }
 
   private String formatTime() {
@@ -21,6 +23,17 @@ public class TimerTask extends BukkitRunnable {
   @Override
   public void run() {
     timer++;
-    board.setTimer(formatTime());
+
+    if (timer == 3600) {
+      app.board.setPhaseCombat();
+      app.data.phaseType = 2;
+    } else if (timer == 7200) {
+      Bukkit.broadcastMessage(ChatColor.RED + "Fin !");
+      app.data.phaseType = 3;
+      cancel();
+    }
+
+    app.board.setTimer(formatTime());
+
   }
 }

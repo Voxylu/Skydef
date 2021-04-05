@@ -1,6 +1,5 @@
 package xyz.voxylu.spigot.skydef.commands;
 
-import java.util.logging.Logger;
 
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -10,7 +9,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.command.CommandExecutor;
 
 import xyz.voxylu.spigot.skydef.App;
-import xyz.voxylu.spigot.skydef.Data;
 
 public class Setlobby implements CommandExecutor {
   private App app;

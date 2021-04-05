@@ -36,8 +36,6 @@ public class Def implements CommandExecutor {
         player.sendMessage(ChatColor.RED + "Un admin à mal fait son boulot.");
       }
 
-      // TODO: check timer
-
       final Location location = player.getLocation();
 
       player.sendMessage(ChatColor.AQUA + "Téléportation en cours, " + ChatColor.BOLD + "ne bouge pas" + ChatColor.RESET

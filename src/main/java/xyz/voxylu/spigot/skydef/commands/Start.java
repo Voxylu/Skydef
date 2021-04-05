@@ -2,7 +2,6 @@ package xyz.voxylu.spigot.skydef.commands;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -13,13 +12,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
 import xyz.voxylu.spigot.skydef.App;
-import xyz.voxylu.spigot.skydef.TimerTask;
 import xyz.voxylu.spigot.skydef.Data;
 import xyz.voxylu.spigot.skydef.RandomTp;
 import xyz.voxylu.spigot.skydef.Stuff;
@@ -136,10 +132,9 @@ public class Start implements CommandExecutor {
     world.setClearWeatherDuration(1000000);
     world.setDifficulty(Difficulty.NORMAL);
 
-    // TODO: timer
-
     app.data.inGame = true;
     app.board.setPhasePrep();
+    app.data.phaseType = 1;
     app.timerTask.runTaskTimer(app, 0, 20);
 
     return true;

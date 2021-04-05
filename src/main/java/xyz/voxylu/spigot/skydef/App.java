@@ -17,7 +17,7 @@ public class App extends JavaPlugin {
     public App() {
         this.data = new Data();
         this.board = new Board();
-        this.timerTask = new TimerTask(this.board);
+        this.timerTask = new TimerTask(this);
 
     }
     

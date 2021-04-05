@@ -1,14 +1,11 @@
 package xyz.voxylu.spigot.skydef.commands;
 
-import java.util.logging.Logger;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import xyz.voxylu.spigot.skydef.App;
-import xyz.voxylu.spigot.skydef.Data;
 
 public class Createteams implements CommandExecutor {
   private App app;

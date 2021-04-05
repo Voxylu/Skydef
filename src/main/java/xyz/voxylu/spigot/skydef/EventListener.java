@@ -1,8 +1,5 @@
 package xyz.voxylu.spigot.skydef;
 
-import java.util.logging.Logger;
-
-
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
