@@ -2,3 +2,44 @@ main: xyz.voxylu.spigot.skydef.App
 name: SkyDef
 version: 1
 api-version: 1.16
+
+commands:
+  createteams:
+    description: Permet de définir la taille des équipes des défenseurs et des attaquants.
+    usage: "Usage: /<command> <taille équipe défenseurs> <taille équipe attackants>"
+    permission: skydef.admin
+  def:
+    description: Permet au défenseurs de se téléporter pendant la phase de préparation.
+    usage: "Usage: /<command>"
+    permission: skydef.base
+  rtp:
+    description: Permet de téléporter un personne à un endroit aléatoire.
+    usage: "Usage: /<command> [player]"
+    permission: skydef.dev
+  setdef:
+    description: Permet de définir le spawn et le coffre des défenseurs.
+    usage: "Usage: /<command> <spawn|chest>"
+    permission: skydef.admin
+  setlobby:
+    description: Permet de définir le point de spawn du lobby.
+    usage: "Usage: /<command>"
+    permission: skydef.admin
+  start:
+    description: Permet de lancer la partie.
+    usage: "Usage: /<command>"
+    permission: skydef.admin
+  timer:
+    description: Permet de gérer les timers.
+    usage: "Usage: /timer [...args]"
+    permission: skydef.dev
+  
+permissions:
+  skydef.base:
+    default: true
+    description: Permission de base pour tous les joueurs.
+  skydef.dev:
+    default: op
+    description: Permission pour tester le plugin.
+  skydef.admin:
+    default: op
+    description: Permission pour mettre en place la partie.

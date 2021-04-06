@@ -44,7 +44,6 @@ public class Start implements CommandExecutor {
     // Clean toutes les teams
     scoreboard.getTeams().forEach((team) -> team.unregister());
 
-    
     ArrayList<Player> defenders = new ArrayList<Player>(app.data.defenderTeamSize);
     ArrayList<ArrayList<Player>> attackers = new ArrayList<ArrayList<Player>>(Data.attackersNames.length);
 
@@ -52,7 +51,7 @@ public class Start implements CommandExecutor {
     defTeam.setColor(ChatColor.AQUA);
     defTeam.setAllowFriendlyFire(false);
     defTeam.setPrefix(String.format("%s[%s]", ChatColor.AQUA, Data.defTeamName));
-    
+
     for (int i = 0; i < Data.attackersNames.length; i++) {
       String name = Data.attackersNames[i];
       ChatColor color = Data.attackersColors[i];
@@ -60,7 +59,8 @@ public class Start implements CommandExecutor {
       team.setColor(color);
       team.setAllowFriendlyFire(false);
       team.setPrefix(String.format("%s[%s]", color, name));
-      attackers.set(i, new ArrayList<Player>(app.data.attackerTeamSize));
+      // attackers.set(i, new ArrayList<Player>(app.data.attackerTeamSize));
+      attackers.add(new ArrayList<Player>(app.data.attackerTeamSize));
     }
 
     ArrayList<Player> players = new ArrayList<Player>(Bukkit.getOnlinePlayers());
@@ -71,7 +71,6 @@ public class Start implements CommandExecutor {
     int iAttackers = 0;
     int iNbAttackers = 0;
 
-
     for (Player player : players) {
       player.setGameMode(GameMode.SURVIVAL);
       player.getInventory().clear();
@@ -80,10 +79,8 @@ public class Start implements CommandExecutor {
 
       if (nbDefenders < app.data.defenderTeamSize) {
         defTeam.addEntry(player.getName());
-        Bukkit.broadcastMessage(String.format(
-          "%s%s%s à rejoin l'équipe des %sdéfenseurs %s!",
-          ChatColor.AQUA, player.getName(), ChatColor.RESET, ChatColor.AQUA, ChatColor.RESET
-        ));
+        Bukkit.broadcastMessage(String.format("%s%s%s à rejoin l'équipe des %sdéfenseurs %s!", ChatColor.AQUA,
+            player.getName(), ChatColor.RESET, ChatColor.AQUA, ChatColor.RESET));
         nbDefenders++;
         defenders.add(player);
       } else {
@@ -92,14 +89,12 @@ public class Start implements CommandExecutor {
         Team team = scoreboard.getTeam(teamName);
 
         team.addEntry(player.getName());
-        Bukkit.broadcastMessage(String.format(
-          "%s%s%s à rejoin l'équipe %s%s %s!",
-          teamColor, player.getName(), ChatColor.RESET, teamColor, teamName, ChatColor.RESET
-        ));
+        Bukkit.broadcastMessage(String.format("%s%s%s à rejoin l'équipe %s%s %s!", teamColor, player.getName(),
+            ChatColor.RESET, teamColor, teamName, ChatColor.RESET));
         iNbAttackers++;
 
         ArrayList<Player> thisTeamAttackers = attackers.get(iAttackers);
-        thisTeamAttackers.set(iNbAttackers, player);
+        thisTeamAttackers.add(player);
 
         if (iNbAttackers == app.data.attackerTeamSize) {
           iAttackers++;

@@ -12,7 +12,7 @@ import org.bukkit.potion.PotionEffectType;
 
 public class RandomTp {
   private Location center;
-  private int size;
+  private int size = 500;
   private Random rand = new Random();
 
   public RandomTp(Location center) {

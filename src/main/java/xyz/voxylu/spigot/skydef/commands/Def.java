@@ -32,14 +32,20 @@ public class Def implements CommandExecutor {
         return true;
       }
 
-      if (this.app.data.defPosition == null) {
+      if (app.data.defPosition == null) {
         player.sendMessage(ChatColor.RED + "Un admin à mal fait son boulot.");
+        return true;
+      }
+
+      if (app.timerTask.timer >= 3600) {
+        player.sendMessage(ChatColor.RED + "La phase de préparation est terminée.");
+        return true;
       }
 
       final Location location = player.getLocation();
 
       player.sendMessage(ChatColor.AQUA + "Téléportation en cours, " + ChatColor.BOLD + "ne bouge pas" + ChatColor.RESET
-          + ChatColor.AQUA + "pendant 5 secondes...");
+          + ChatColor.AQUA + " pendant 5 secondes...");
 
       BukkitRunnable task = new BukkitRunnable() {
         @Override

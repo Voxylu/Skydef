@@ -1,6 +1,5 @@
 package xyz.voxylu.spigot.skydef.commands;
 
-
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -29,30 +28,34 @@ public class Setdef implements CommandExecutor {
 
       String arg = args[0].toLowerCase();
 
-      if (arg == "spawn") {
+      app.logger.info(String.format("[%s]", arg));
+
+      if (arg.equals("spawn")) {
         Location location = player.getLocation();
-  
-        player.sendMessage(String.format("Point de spawn des défenseurs en %d %d %d.", location.getX(),
+
+        player.sendMessage(String.format("Point de spawn des défenseurs en %d %d %d.", location.getBlockX(),
             location.getBlockY(), location.getBlockZ()));
-  
+
         app.data.defPosition = location;
-  
+
         return true;
-      } else if (arg == "chest") {
-        Block block = player.getTargetBlock(null,5);
+      } else if (arg.equals("chest")) {
+
+        app.logger.info("chest");
+
+        Block block = player.getTargetBlock(null, 5);
 
         if (block.getType() != Material.CHEST) {
           player.sendMessage(String.format("%sLe block sélectionné n'est pas un coffre."));
           return true;
         }
 
-
         Location location = block.getLocation();
 
         app.data.defChest = location;
 
-        player.sendMessage(String.format("Coffre des défenseurs en %d %d %d.", location.getX(),
-        location.getBlockY(), location.getBlockZ()));
+        player.sendMessage(String.format("Coffre des défenseurs en %d %d %d.", location.getBlockX(),
+            location.getBlockY(), location.getBlockZ()));
 
         return true;
       } else {

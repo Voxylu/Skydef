@@ -1,6 +1,5 @@
 package xyz.voxylu.spigot.skydef.commands;
 
-
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.Command;
@@ -24,8 +23,8 @@ public class Setlobby implements CommandExecutor {
       Location location = player.getLocation();
       World world = player.getWorld();
 
-      player
-          .sendMessage(String.format("Lobby set en %d %d %d", location.getX(), location.getY(), location.getBlockZ()));
+      player.sendMessage(
+          String.format("Lobby set en %d %d %d", location.getBlockX(), location.getBlockY(), location.getBlockZ()));
 
       world.setPVP(false);
       world.setSpawnLocation(location);

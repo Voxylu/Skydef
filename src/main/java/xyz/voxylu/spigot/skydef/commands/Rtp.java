@@ -1,5 +1,6 @@
 package xyz.voxylu.spigot.skydef.commands;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -10,11 +11,9 @@ import xyz.voxylu.spigot.skydef.RandomTp;
 
 public class Rtp implements CommandExecutor {
   private App app;
-  private RandomTp randomTp;
 
   public Rtp(App app) {
     this.app = app;
-    this.randomTp = new RandomTp(this.app.data.defPosition);
   }
 
   @Override
@@ -22,7 +21,14 @@ public class Rtp implements CommandExecutor {
     if (sender instanceof Player) {
       Player player = (Player) sender;
 
-      this.randomTp.teleportOnePlayer(player);
+      if (app.data.defPosition == null) {
+        player.sendMessage(ChatColor.RED + "Pas de position pour les défenseurs définie.");
+        return true;
+      }
+
+      RandomTp randomTp = new RandomTp(app.data.defPosition);
+
+      randomTp.teleportOnePlayer(player);
 
       return true;
     } else {

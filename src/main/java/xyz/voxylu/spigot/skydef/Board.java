@@ -15,24 +15,45 @@ public class Board {
     obj.setDisplaySlot(DisplaySlot.SIDEBAR);
 
     Team phaseTeam = board.registerNewTeam("phaseTeam");
-    phaseTeam.addEntry("phase");
-    phaseTeam.setPrefix(String.format("%sPhase: %sEn attente", ChatColor.WHITE, ChatColor.GRAY));
-    obj.getScore("phase").setScore(15);
-
+    String phaseEntry = ChatColor.RED + "" + ChatColor.WHITE;
+    phaseTeam.addEntry(phaseEntry);
+    phaseTeam.setPrefix(String.format("%sPhase: %sEn attente", ChatColor.BLUE, ChatColor.GRAY));
+    obj.getScore(phaseEntry).setScore(15);
 
     Team timerTeam = board.registerNewTeam("timerTeam");
-    timerTeam.addEntry("timer");
+    String teamEntry = ChatColor.AQUA + "" + ChatColor.WHITE;
+    timerTeam.addEntry(teamEntry);
     timerTeam.setPrefix(String.format("%sTemps: %s00:00:00", ChatColor.BLUE, ChatColor.WHITE));
-    obj.getScore("timer").setScore(13);
+    obj.getScore(teamEntry).setScore(13);
 
     player.setScoreboard(board);
+  }
+
+  public void setPhase(int phase) {
+    if (phase == 0) {
+      setPhaseAttente();
+    } else if (phase == 1) {
+      setPhasePrep();
+    } else if (phase == 2) {
+      setPhaseCombat();
+    } else {
+      setPhaseFin();
+    }
+  }
+
+  public void setPhaseFin() {
+    for (Player player : Bukkit.getOnlinePlayers()) {
+      Scoreboard board = player.getScoreboard();
+      Team phaseTeam = board.getTeam("phaseTeam");
+      phaseTeam.setPrefix(String.format("%sPhase: %Fin", ChatColor.BLUE, ChatColor.RED));
+    }
   }
 
   public void setPhasePrep() {
     for (Player player : Bukkit.getOnlinePlayers()) {
       Scoreboard board = player.getScoreboard();
       Team phaseTeam = board.getTeam("phaseTeam");
-      phaseTeam.setPrefix(String.format("%sPhase: %sPrépartion", ChatColor.WHITE, ChatColor.AQUA));
+      phaseTeam.setPrefix(String.format("%sPhase: %sPrépartion", ChatColor.BLUE, ChatColor.AQUA));
     }
   }
 
@@ -40,7 +61,15 @@ public class Board {
     for (Player player : Bukkit.getOnlinePlayers()) {
       Scoreboard board = player.getScoreboard();
       Team phaseTeam = board.getTeam("phaseTeam");
-      phaseTeam.setPrefix(String.format("%sPhase: %sCombat", ChatColor.WHITE, ChatColor.RED));
+      phaseTeam.setPrefix(String.format("%sPhase: %sCombat", ChatColor.BLUE, ChatColor.RED));
+    }
+  }
+
+  public void setPhaseAttente() {
+    for (Player player : Bukkit.getOnlinePlayers()) {
+      Scoreboard board = player.getScoreboard();
+      Team phaseTeam = board.getTeam("phaseTeam");
+      phaseTeam.setPrefix(String.format("%sPhase: %sEn attente", ChatColor.BLUE, ChatColor.GRAY));
     }
   }
 

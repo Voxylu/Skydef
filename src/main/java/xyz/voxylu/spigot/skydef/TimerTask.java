@@ -5,7 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class TimerTask extends BukkitRunnable {
-  private int timer = 0;
+  public int timer = 0;
   private App app;
 
   public TimerTask(App app) {
@@ -13,11 +13,11 @@ public class TimerTask extends BukkitRunnable {
   }
 
   private String formatTime() {
-    int minutes = timer % 60;
-    int seconds = timer % 3600;
-    int hours = timer / 3600;
-    
-    return String.format("%d:%d:%d", hours, minutes, seconds);
+    int h = timer / 3600;
+    int m = timer % 3600 / 60;
+    int s = timer % 3600 % 60;
+
+    return String.format("%02d:%02d:%02d", h, m, s);
   }
 
   @Override
@@ -27,6 +27,7 @@ public class TimerTask extends BukkitRunnable {
     if (timer == 3600) {
       app.board.setPhaseCombat();
       app.data.phaseType = 2;
+      Bukkit.broadcastMessage(ChatColor.DARK_RED + "Fin de la phase de préparation! Début de la phase des combats!");
     } else if (timer == 7200) {
       Bukkit.broadcastMessage(ChatColor.RED + "Fin !");
       app.data.phaseType = 3;
