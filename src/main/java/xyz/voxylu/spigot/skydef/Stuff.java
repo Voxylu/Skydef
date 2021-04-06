@@ -13,7 +13,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-
 public class Stuff {
   private App app;
 
@@ -36,7 +35,11 @@ public class Stuff {
       chestInventory.addItem(new ItemStack(Material.DIAMOND_PICKAXE));
       chestInventory.addItem(new ItemStack(Material.WHITE_BED));
       chestInventory.addItem(new ItemStack(Material.WATER_BUCKET));
-      chestInventory.addItem(new ItemStack(Material.OAK_LOG,16));
+      chestInventory.addItem(new ItemStack(Material.OAK_LOG, 16));
+
+      ItemStack banner = new ItemStack(Material.WHITE_BANNER);
+
+      chestInventory.addItem(banner);
 
       for (Player defender : defenders) {
         PlayerInventory defenderInventory = defender.getInventory();
@@ -49,20 +52,21 @@ public class Stuff {
         defenderInventory.addItem(new ItemStack(Material.ARROW, 16));
         defenderInventory.addItem(new ItemStack(Material.COOKED_BEEF, 16));
         ItemStack[] armor = { new ItemStack(Material.IRON_BOOTS), new ItemStack(Material.IRON_LEGGINGS),
-          new ItemStack(Material.IRON_CHESTPLATE), new ItemStack(Material.IRON_HELMET), };
+            new ItemStack(Material.IRON_CHESTPLATE), new ItemStack(Material.IRON_HELMET), };
         defenderInventory.setArmorContents(armor);
       }
     } else {
-      Bukkit.broadcastMessage(String.format("%sLe coffre des défenseur n'a pas été initiliasé correctement :(", ChatColor.RED));
+      Bukkit.broadcastMessage(
+          String.format("%sLe coffre des défenseur n'a pas été initiliasé correctement :(", ChatColor.RED));
     }
   }
 
   public void setAttStuff(ArrayList<Player> attackers) {
     for (Player attacker : attackers) {
       PlayerInventory attackerInventory = attacker.getInventory();
-      
+
       attackerInventory.clear();
-      
+
       attackerInventory.addItem(new ItemStack(Material.WHITE_BED));
     }
   }
